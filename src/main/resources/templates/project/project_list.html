@@ -13,7 +13,7 @@
 <div class="searchTable">
     名称：
     <div class="layui-inline">
-        <input class="layui-input" name="userName" id="userName" autocomplete="off">
+        <input class="layui-input" name="projectName" id="projectName" autocomplete="off">
     </div>
 <!--  手机号：  -->
 <!--    <div class="layui-inline">-->
@@ -96,9 +96,6 @@
                     {type: 'checkbox', fixed: 'left'}
                     ,{field: 'projectId', title:'ID',  align:'center' }
                     ,{field: 'projectName', title:'名称',  align:'center' }
-//                    ,{field: 'password', title:'密码',  align:'center',templet: function(d){return "......"} }
-//                    ,{field: 'enable', title:'状态',  align:'center', templet: function(d){return dict(d,'enable');} }
-//                    ,{field: 'phoneNo', title:'手机号码',  align:'center' }
                     ,{field: 'projectNum', title:'项目编号',  align:'center' }
                     ,{field: 'startDate', title:'开始时间',  align:'center' }
                     ,{field: 'projectPlantime', title:'计划完成时间',  align:'center' }
@@ -107,8 +104,6 @@
                     ,{field: 'userName', title:'负责人名字',  align:'center' }
                     ,{field: 'customerId', title:'合同对方ID',  align:'center' }
                     ,{field: 'userId', title:'用户ID',  align:'center' }
-//                    ,{field: 'sex', title:'性别',  align:'center',templet: function(d){return dict(d,'sex');} }
-//                    ,{field: 'info', title:'简介',  align:'center' }
                     ,{fixed: 'right', title:'操作', toolbar: '#barDemo'}
             ]
             ]
@@ -134,9 +129,9 @@
             reload: function(){
             	var queryWhere = {}; 
             	
-                var userName$_ = $('#userName');
+                var userName$_ = $('#projectName');
                 if(userName$_.val()!=''){
-                	 queryWhere['userName'] = userName$_.val();
+                	 queryWhere['projectName'] = userName$_.val();
                 }  
                 
                 // var phoneNo$_ = $('#phoneNo');
@@ -148,6 +143,8 @@
                     page: {
                         curr: 1 //重新从第 1 页开始
                     }
+                    ,url: '/project/queryProjectByName'
+                    ,method: 'POST'
                     ,where: queryWhere
                     ,done: function(res, curr, count){
                     	this.where= {};
